@@ -4,6 +4,8 @@ function onReady() {
 onReady()
 let winnerTitle = document.getElementById("winner");
 let roundNum = 0;
+let min = 1;
+let max = 25;
 
 function createRound(event) {
 event.preventDefault();
@@ -78,7 +80,7 @@ for(let anObject of theRounds) {
       tomsTableResult[i].classList.add("exact");
     }
   }
-  let bensTableResult = document.querySeorlectAll('.bens-result');
+  let bensTableResult = document.querySelectorAll('.bens-result');
   for (let i = 0; i < bensTableResult.length; i++) {
     let text = bensTableResult[i].innerText;
     //check for your target text
@@ -112,8 +114,8 @@ function resetRound(event) {
 
 function changeMinMax(event){
   event.preventDefault();
-  let minNum = document.getElementById('random-min');
-  let maxNum = document.getElementById('random-max');
+  let minNum = document.getElementById('random-min').value;
+  let maxNum = document.getElementById('random-max').value;
 
   let newMinMax = {
     min: minNum,
@@ -138,9 +140,11 @@ function fetchNewRange() {
   })
   .then((response) => {
     const newRange = response.data;
+    min = newRange.min;
+    max = newRange.max;
     let rangeDiv = document.getElementById('num-range');
 console.log(newRange);
-    rangeDiv.innerHTML = `
+    rangeDiv.innerText = `
     ${newRange.min} - ${newRange.max}
     `;
   })
