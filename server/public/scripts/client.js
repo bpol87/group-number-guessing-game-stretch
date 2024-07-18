@@ -78,7 +78,7 @@ for(let anObject of theRounds) {
       tomsTableResult[i].classList.add("exact");
     }
   }
-  let bensTableResult = document.querySelectorAll('.bens-result');
+  let bensTableResult = document.querySeorlectAll('.bens-result');
   for (let i = 0; i < bensTableResult.length; i++) {
     let text = bensTableResult[i].innerText;
     //check for your target text
@@ -93,8 +93,8 @@ for(let anObject of theRounds) {
       bensTableResult[i].classList.add("exact");
     }
   }
-
-
+let guessForm = document.getElementById('guess-inputs');
+guessForm.reset();
 })
 
 }
@@ -107,5 +107,41 @@ function resetRound(event) {
   })
   .then ((response) => {
     fetchRound();
+  })
+}
+
+function changeMinMax(event){
+  event.preventDefault();
+  let minNum = document.getElementById('random-min');
+  let maxNum = document.getElementById('random-max');
+
+  let newMinMax = {
+    min: minNum,
+    max: maxNum
+  }
+
+  axios({
+    method: 'POST',
+    url: '/newMinMax',
+    data: newMinMax
+  })
+  .then ((response) => {
+  console.log('response is:', response);
+    fetchNewRange();
+  })
+  }
+
+function fetchNewRange() {
+  axios({
+    method: 'GET',
+    url:'/newMinMax'
+  })
+  .then((response) => {
+    const newRange = response.data;
+    let rangeDiv = document.getElementById('num-range');
+console.log(newRange);
+    rangeDiv.innerHTML = `
+    ${newRange.min} - ${newRange.max}
+    `;
   })
 }

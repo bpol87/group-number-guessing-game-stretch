@@ -12,8 +12,21 @@
 </head>
 <body>
     <h1>YOUR GAME HERE!</h1>
+    <section>
+      <h2>Change the Min and Max numbers!</h2>
+      <p>Current range: <span id="num-range">1 - 25</span></p>
+      <form>
+        <input type="number"
+               placeholder="Enter New Min #" 
+               id="random-min">
+        <input type="number"
+               placeholder="Enter New Max #" 
+               id="random-max">
+               <button type="submit" onclick="changeMinMax(event)">Submit</button>
+      </form>
+    </section>
     <h2 id="continue-round">Enter another round of guesses:</h2>
-    <form>
+    <form id="guess-inputs">
       <input
       id = "toms-input"
       placeholder = "Tom's Guess"
