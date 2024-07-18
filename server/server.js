@@ -10,13 +10,12 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json());
 app.use(express.static('server/public'));
 
+let randomNumber = require('./randomNumber.js');
 let randomRoundNumber = randomNumber(1, 25);
+
 let roundGuesses = [];
 
 console.log('Random number is:', randomRoundNumber);
-function randomNumber(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
-}
 
 function roundCompare(req) {
   let tomsRoundGuess = Number(req.tomsGuess);
