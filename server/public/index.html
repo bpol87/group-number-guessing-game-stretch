@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Guess A Number!</title>
+  <script defer src="scripts/client.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <h1>YOUR GAME HERE!</h1>
+    <h2 id="continue-round">Enter another round of guesses:</h2>
+    <form>
+      <input
+      id = "toms-input"
+      placeholder = "Tom's Guess"
+      type="text" >
+      <input
+      id="ben-input"
+      placeholder = "Ben's Guess"
+      type="text">
+      <button onclick="createRound(event)">Submit</button>
+    </form>
+    <form id="reset-btn">
+      <button onclick="resetRound(event)">Reset Round</button>
+    </form>
+    <section>
+      <h2>Round Results</h2>
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>Round</th>
+            <th>Tom's Guess</th>
+            <th></th>
+            <th>Ben's Guess</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="round-results">
+            <!-- this is where the data will go for the rounds -->
+        </tbody>
+      </table>
+    </section>
+    <section id="winner">
+    </section>
+</body>
+</html>
