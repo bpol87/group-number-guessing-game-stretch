@@ -51,3 +51,15 @@ thead th:nth-child(5) {
     border: 1px solid darkgreen;
     color: darkgreen;
 }
+
+#num-range {
+    width: 100%;
+}
+
+.error {
+    border: 2px solid darkred;
+}
+
+.error-range {
+    color: darkred;
+}

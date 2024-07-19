@@ -4,28 +4,34 @@ function onReady() {
 onReady()
 let winnerTitle = document.getElementById("winner");
 let roundNum = 0;
+let min = 1;
+let max = 25;
 
 function createRound(event) {
 event.preventDefault();
 let tomsGuess = document.getElementById('toms-input').value;
-let bensGuess = document.getElementById('ben-input').value;
+let bensGuess = document.getElementById('ben-input').value;  
 
-let newRound = {
-  tomsGuess: tomsGuess,
-  tomsResult: 'guess',
-  bensGuess: bensGuess,
-  bensResult: 'guess'
-}
+  if (!isValidGuess(tomsGuess, bensGuess)) {
+    // if Validation fails, stop:
+    return;
+  }
 
-axios({
-  method: 'POST',
-  url: '/round',
-  data: newRound
-})
-.then ((response) => {
-console.log('response is:', response);
-  fetchRound();
-})
+    let newRound = {
+      tomsGuess: tomsGuess,
+      tomsResult: 'guess',
+      bensGuess: bensGuess,
+      bensResult: 'guess'
+    }
+    
+    axios({
+      method: 'POST',
+      url: '/round',
+      data: newRound
+    })
+    .then ((response) => {
+      fetchRound();
+    })
 }
 
 function fetchRound() {
@@ -36,7 +42,6 @@ function fetchRound() {
   })
   .then((response) => {
     const theRounds = response.data;
-    console.log(theRounds);
 let roundTable = document.getElementById('round-results');
 
 roundTable.innerHTML = '';
@@ -93,8 +98,8 @@ for(let anObject of theRounds) {
       bensTableResult[i].classList.add("exact");
     }
   }
-
-
+let guessForm = document.getElementById('guess-inputs');
+guessForm.reset();
 })
 
 }
@@ -108,4 +113,65 @@ function resetRound(event) {
   .then ((response) => {
     fetchRound();
   })
+}
+
+function changeMinMax(event){
+  event.preventDefault();
+  let minNum = document.getElementById('random-min').value;
+  let maxNum = document.getElementById('random-max').value;
+
+  let newMinMax = {
+    min: minNum,
+    max: maxNum
+  }
+
+  axios({
+    method: 'POST',
+    url: '/newMinMax',
+    data: newMinMax
+  })
+  .then ((response) => {
+    fetchNewRange();
+  })
+  }
+
+function fetchNewRange() {
+  axios({
+    method: 'GET',
+    url:'/newMinMax'
+  })
+  .then((response) => {
+    const newRange = response.data;
+    min = newRange.min;
+    max = newRange.max;
+
+    let rangeMinDiv = document.getElementById('min-num');
+    let rangeMaxDiv = document.getElementById('max-num');
+    
+    rangeMinDiv.innerText = `${min}`;
+    rangeMaxDiv.innerText = `${max}`;
+  })
+}
+
+function isValidGuess(tomsGuess, bensGuess) {
+  let errorValidation = document.querySelector('.error-range');
+  let tomsInput = document.getElementById('toms-input');
+  let bensInput = document.getElementById('ben-input');
+  let result = true;
+  tomsInput.classList.remove('error');
+  bensInput.classList.remove('error');
+  errorValidation.innerText = " ";
+
+  if (tomsGuess < min || tomsGuess > max) {
+    tomsInput.classList.add('error');
+    errorValidation.innerText = 'Please select a number within the range!';
+    result = false;
+  }
+
+  if (bensGuess < min || bensGuess > max) {
+    bensInput.classList.add('error')
+    errorValidation.innerText = 'Please select a number within the range!';
+    result = false;
+  } 
+  return result;
 }
