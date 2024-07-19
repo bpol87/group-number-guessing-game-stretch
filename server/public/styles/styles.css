@@ -1,4 +1,56 @@
+/* MAIN STYLING */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    border: 5px solid goldenrod;
+    padding: 0px 30px 30px 30px;
+    width: 50%;
+    text-align: center;
+}
+/* TEXT STYLING */
+
+h1 {
+    background-color: #006;
+    color: #fff;
+}
+
+h2 {
+    background-color: #006;
+    color: #fff;
+}
+
+/* BUTTON STYLING */
+
+#reset-btn {
+    display: none;
+}
+
+button {
+    font-size: 15pt;
+}
+
+/* FORM STYLING */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    margin: 5px;
+    width: 45%;
+    font-size: 15pt;
+}
+
+/* TABLE STYLES */
+
 table {
+    width: 100%;
     border-collapse:collapse;
     border: 1px solid #006;
     text-align: center;
@@ -15,7 +67,7 @@ td {
 }
 
 thead th:nth-child(1) {
-    width: 50px;
+    width: 40px;
 }
 
 thead th:nth-child(2) {
@@ -60,6 +112,6 @@ thead th:nth-child(5) {
     border: 2px solid darkred;
 }
 
-.error-range {
+#error-range {
     color: darkred;
 }

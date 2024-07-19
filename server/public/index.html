@@ -11,6 +11,7 @@
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
+  <main>
     <h1>Random Number Game!</h1>
     <section>
       <h2>Change the Min and Max numbers!</h2>
@@ -31,16 +32,13 @@
       <input
       id = "toms-input"
       placeholder = "Tom's Guess"
-      type="text" >
+      type="number" >
       <input
       id="ben-input"
       placeholder = "Ben's Guess"
-      type="text">
+      type="number">
       <button onclick="createRound(event)">Submit</button>
-      <p class="error-range"></p>
-    </form>
-    <form id="reset-btn">
-      <button onclick="resetRound(event)">Reset Round</button>
+      <section id="error-range"></section>
     </form>
     <section>
       <h2>Round Results</h2>
@@ -61,5 +59,9 @@
     </section>
     <section id="winner">
     </section>
+    <form id="reset-btn">
+      <button onclick="resetRound(event)">Reset Round</button>
+    </form>
+  </main>
 </body>
 </html>

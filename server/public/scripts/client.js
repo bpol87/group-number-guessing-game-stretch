@@ -3,6 +3,12 @@ function onReady() {
 
 onReady()
 let winnerTitle = document.getElementById("winner");
+let errorValidation = document.querySelector('#error-range');
+let tomsInput = document.getElementById('toms-input');
+let bensInput = document.getElementById('ben-input');
+let ResetBtn = document.getElementById('reset-btn');
+let valid = true;
+let match = true;
 let roundNum = 0;
 let min = 1;
 let max = 25;
@@ -13,7 +19,18 @@ let tomsGuess = document.getElementById('toms-input').value;
 let bensGuess = document.getElementById('ben-input').value;  
 
   if (!isValidGuess(tomsGuess, bensGuess)) {
-    // if Validation fails, stop:
+    valid = false;
+  } else {
+    valid = true;
+  }
+
+  if (!isNotMatch(tomsGuess, bensGuess)) {
+    match = false;
+  } else {
+    match = true;
+  }
+
+  if (valid === false || match === false) {
     return;
   }
 
@@ -61,11 +78,15 @@ for(let anObject of theRounds) {
   if(anObject.tomsResult === 'exact') {
     winnerTitle.innerHTML += `
       <h2>Tom Wins!</h2>
-    `}
+    `
+    ResetBtn.style.display = "block";
+  }
   if(anObject.bensResult === 'exact') {
     winnerTitle.innerHTML += `
       <h2>Ben Wins!</h2>
-    `}
+    `
+    ResetBtn.style.display = "block";
+  }
   }
   
   let tomsTableResult = document.querySelectorAll('.toms-result');
@@ -154,9 +175,6 @@ function fetchNewRange() {
 }
 
 function isValidGuess(tomsGuess, bensGuess) {
-  let errorValidation = document.querySelector('.error-range');
-  let tomsInput = document.getElementById('toms-input');
-  let bensInput = document.getElementById('ben-input');
   let result = true;
   tomsInput.classList.remove('error');
   bensInput.classList.remove('error');
@@ -164,14 +182,31 @@ function isValidGuess(tomsGuess, bensGuess) {
 
   if (tomsGuess < min || tomsGuess > max) {
     tomsInput.classList.add('error');
-    errorValidation.innerText = 'Please select a number within the range!';
     result = false;
   }
 
   if (bensGuess < min || bensGuess > max) {
     bensInput.classList.add('error')
-    errorValidation.innerText = 'Please select a number within the range!';
+    
     result = false;
-  } 
+  }
+  if (result === false) {
+    errorValidation.innerHTML += `
+    <p>Please select a number within the range!</p>`;
+  }
   return result;
+}
+
+function isNotMatch(tomsGuess, bensGuess) {
+  let result = true;
+
+  if (tomsGuess === bensGuess) {
+    tomsInput.classList.add('error');
+    bensInput.classList.add('error');
+    errorValidation.innerHTML += `
+    <p>Please pick different numbers!</p>
+    `
+    result = false;
+  }
+return result;
 }
