@@ -153,6 +153,12 @@ function changeMinMax(event){
   })
   .then ((response) => {
     fetchNewRange();
+    resetRound();
+    fetchRound();
+  
+    let minMaxForm = document.getElementById('min-max-form');
+    minMaxForm.reset();
+  
   })
   }
 

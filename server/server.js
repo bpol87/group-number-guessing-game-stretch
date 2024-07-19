@@ -68,7 +68,7 @@ app.post('/reset', (req, res) => {
   
   roundGuesses = [];
   console.log('random number is:', randomRoundNumber);
-  randomRoundNumber = randomNumber(1, 25);
+  randomRoundNumber = randomNumber(min, max);
   console.log('the new random number is:', randomRoundNumber);
   
   res.sendStatus(201);
