@@ -14,11 +14,12 @@
     <h1>Random Number Game!</h1>
     <section>
       <h2>Change the Min and Max numbers!</h2>
-      <p>Current range: <span id="num-range"><span id="max-num">1</span> - <span id="min-num"></span>25</span></p>
+      <p id="num-range">Current range: <span id="min-num">1</span> - <span id="max-num">25</span></p>
       <form>
         <input type="number"
                placeholder="Enter New Min #" 
                id="random-min">
+               
         <input type="number"
                placeholder="Enter New Max #" 
                id="random-max">
@@ -36,6 +37,7 @@
       placeholder = "Ben's Guess"
       type="text">
       <button onclick="createRound(event)">Submit</button>
+      <p class="error-range"></p>
     </form>
     <form id="reset-btn">
       <button onclick="resetRound(event)">Reset Round</button>
